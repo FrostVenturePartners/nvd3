@@ -5399,7 +5399,7 @@ nv.models.line = function() {
 
 
   return chart;
-};
+}
 
 nv.models.lineChart = function() {
   "use strict";
