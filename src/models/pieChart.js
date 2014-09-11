@@ -22,7 +22,8 @@ nv.models.pieChart = function() {
     , defaultState = null
     , noData = "No Data Available."
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
-    ;
+    , labelColor = ''
+		;
 
   //============================================================
 
@@ -102,7 +103,7 @@ nv.models.pieChart = function() {
       var gEnter = wrap.enter().append('g').attr('class', 'nvd3 nv-wrap nv-pieChart').append('g');
       var g = wrap.select('g');
 
-      gEnter.append('g').attr('class', 'nv-pieWrap');
+      gEnter.append('g').attr('class', 'nv-pieWrap').style('stroke', labelColor);
       gEnter.append('g').attr('class', 'nv-legendWrap');
 
       //------------------------------------------------------------
@@ -242,7 +243,9 @@ nv.models.pieChart = function() {
   };
 
   chart.color = function(_) {
-    if (!arguments.length) return color;
+    if (_==undefined || !arguments.length){
+    return chart;
+    }
     color = nv.utils.getColor(_);
     legend.color(color);
     pie.color(color);
@@ -282,6 +285,12 @@ nv.models.pieChart = function() {
   chart.noData = function(_) {
     if (!arguments.length) return noData;
     noData = _;
+    return chart;
+  };
+
+  chart.labelColor = function(_){
+    if (!arguments.length) return labelColor;
+    labelColor = nv.utils.getColor(_);
     return chart;
   };
 

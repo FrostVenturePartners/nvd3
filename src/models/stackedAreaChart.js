@@ -39,6 +39,8 @@ nv.models.stackedAreaChart = function() {
     , cData = ['Stacked','Stream','Expanded']
     , controlLabels = {}
     , transitionDuration = 250
+    , XAxisColor = ''
+    , YAxisColor = ''
     ;
 
   xAxis
@@ -138,8 +140,8 @@ nv.models.stackedAreaChart = function() {
       var g = wrap.select('g');
 
       gEnter.append("rect").style("opacity",0);
-      gEnter.append('g').attr('class', 'nv-x nv-axis');
-      gEnter.append('g').attr('class', 'nv-y nv-axis');
+			gEnter.append('g').attr('class', 'nv-x nv-axis').style('fill', XAxisColor);
+      gEnter.append('g').attr('class', 'nv-y nv-axis').style('fill', YAxisColor);
       gEnter.append('g').attr('class', 'nv-stackedWrap');
       gEnter.append('g').attr('class', 'nv-legendWrap');
       gEnter.append('g').attr('class', 'nv-controlsWrap');
@@ -517,7 +519,7 @@ nv.models.stackedAreaChart = function() {
   };
 
   chart.color = function(_) {
-    if (!arguments.length) return color;
+    if (_==undefined || !arguments.length) return chart;
     color = nv.utils.getColor(_);
     legend.color(color);
     stacked.color(color);
@@ -626,6 +628,18 @@ nv.models.stackedAreaChart = function() {
     if (!arguments.length) return yAxisTickFormat;
     yAxisTickFormat = _;
     return yAxis;
+  };
+
+  chart.XAxisColor = function (_) {
+     if (!arguments.length) return XAxisColor;
+     XAxisColor = nv.utils.getColor(_);
+     return chart;
+  };
+
+  chart.YAxisColor = function (_) {
+     if (!arguments.length) return YAxisColor;
+     YAxisColor = nv.utils.getColor(_);
+     return chart;
   };
 
 

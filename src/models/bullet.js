@@ -24,6 +24,8 @@ nv.models.bullet = function() {
     , tickFormat = null
     , color = nv.utils.getColor(['#1f77b4'])
     , dispatch = d3.dispatch('elementMouseover', 'elementMouseout')
+    , rangeColor = ''
+    , markerTriangleColor = ''
     ;
 
   //============================================================
@@ -374,6 +376,18 @@ nv.models.bullet = function() {
     if (!arguments.length) return color;
     color = nv.utils.getColor(_);
     return chart;
+  };
+
+  chart.rangeColor = function(_) {
+     if (!arguments.length) return rangeColor;
+     rangeColor = nv.utils.getColor(_);
+     return chart;
+  };
+
+  chart.markerTriangleColor = function(_) {
+     if (!arguments.length) return markerTriangleColor;
+     markerTriangleColor = nv.utils.getColor(_);
+     return chart;
   };
 
   //============================================================

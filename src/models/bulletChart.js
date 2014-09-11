@@ -27,6 +27,11 @@ nv.models.bulletChart = function() {
       }
     , noData = 'No Data Available.'
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide')
+    , titleColor = ''
+    , rangeColor = ''
+    , markerTriangleColor = ''
+    , labelColor = ''
+
     ;
 
   //============================================================
@@ -99,7 +104,7 @@ nv.models.bulletChart = function() {
       var g = wrap.select('g');
 
       gEnter.append('g').attr('class', 'nv-bulletWrap');
-      gEnter.append('g').attr('class', 'nv-titles');
+      gEnter.append('g').attr('class', 'nv-titles').style('fill', titleColor);
 
       wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
@@ -179,7 +184,8 @@ nv.models.bulletChart = function() {
       var tickEnter = tick.enter().append('g')
           .attr('class', 'nv-tick')
           .attr('transform', function(d) { return 'translate(' + x0(d) + ',0)' })
-          .style('opacity', 1e-6);
+          .style('opacity', 1e-6)
+					.style('fill', labelColor);
 
       tickEnter.append('line')
           .attr('y1', availableHeight)
@@ -331,6 +337,36 @@ nv.models.bulletChart = function() {
   chart.noData = function(_) {
     if (!arguments.length) return noData;
     noData = _;
+    return chart;
+  };
+
+  chart.color = function(_) {
+    if (!arguments.length) return color;
+    bullet.color(_)
+    return chart;
+  };
+
+  chart.rangeColor = function(_) {
+    if (!arguments.length) return rangeColor;
+    bullet.rangeColor(_);
+    return chart;
+  };
+
+  chart.markerTriangleColor = function(_) {
+    if (!arguments.length) return markerTriangleColor;
+    bullet.markerTriangleColor(_);
+    return chart;
+  };
+
+  chart.titleColor = function(_){
+    if (!arguments.length) return titleColor;
+    titleColor = nv.utils.getColor(_);
+    return chart;
+  };
+
+  chart.labelColor = function(_){
+    if (!arguments.length) return labelColor;
+    labelColor = nv.utils.getColor(_);
     return chart;
   };
 

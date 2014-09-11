@@ -30,15 +30,19 @@ nv.models.scatterChart = function() {
     , showControls = !!d3.fisheye
     , fisheye      = 0
     , pauseFisheye = false
+    , toolTipPrefixX = ''
+    , toolTipPrefixY = ''
     , tooltips     = true
-    , tooltipX     = function(key, x, y) { return '<strong>' + x + '</strong>' }
-    , tooltipY     = function(key, x, y) { return '<strong>' + y + '</strong>' }
+    , tooltipX     = function(key, x, y) { return '<strong>' + toolTipPrefixX +'' + x + '</strong>' }
+    , tooltipY     = function(key, x, y) { return '<strong>' + toolTipPrefixY +'' + y + '</strong>' }
     , tooltip      = null
     , state = {}
     , defaultState = null
     , dispatch     = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , noData       = "No Data Available."
     , transitionDuration = 250
+	  , XAxisColor = ''
+    , YAxisColor = ''
     ;
 
   scatter
@@ -169,8 +173,8 @@ nv.models.scatterChart = function() {
       // background for pointer events
       gEnter.append('rect').attr('class', 'nvd3 nv-background');
 
-      gEnter.append('g').attr('class', 'nv-x nv-axis');
-      gEnter.append('g').attr('class', 'nv-y nv-axis');
+      gEnter.append('g').attr('class', 'nv-x nv-axis').style('fill', XAxisColor);
+      gEnter.append('g').attr('class', 'nv-y nv-axis').style('fill', YAxisColor);
       gEnter.append('g').attr('class', 'nv-scatterWrap');
       gEnter.append('g').attr('class', 'nv-distWrap');
       gEnter.append('g').attr('class', 'nv-legendWrap');
@@ -620,6 +624,31 @@ nv.models.scatterChart = function() {
     transitionDuration = _;
     return chart;
   };
+
+	chart.XAxisColor = function (_) {
+    if (!arguments.length) return XAxisColor;
+    XAxisColor =  nv.utils.getColor(_);
+    return chart;
+  };
+
+  chart.YAxisColor = function (_) {
+    if (!arguments.length) return YAxisColor;
+    YAxisColor =  nv.utils.getColor(_);
+    return chart;
+  };
+
+  chart.toolTipPrefixX = function (_) {
+    if (!arguments.length) return toolTipPrefixX;
+    toolTipPrefixX = _;
+    return chart;
+  };
+
+  chart.toolTipPrefixY = function (_) {
+    if (!arguments.length) return toolTipPrefixY;
+    toolTipPrefixY = _;
+    return chart;
+  };
+
 
   //============================================================
 
