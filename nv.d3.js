@@ -1506,11 +1506,12 @@ nv.models.bullet = function() {
       var gEnter = wrapEnter.append('g');
       var g = wrap.select('g');
 
-      gEnter.append('rect').attr('class', 'nv-range nv-rangeMax');
-      gEnter.append('rect').attr('class', 'nv-range nv-rangeAvg');
-      gEnter.append('rect').attr('class', 'nv-range nv-rangeMin');
+			gEnter.append('rect').attr('class', 'nv-range nv-rangeMax').style('fill', rangeColor);
+      gEnter.append('rect').attr('class', 'nv-range nv-rangeAvg').style('fill', rangeColor);
+      gEnter.append('rect').attr('class', 'nv-range nv-rangeMin').style('fill', rangeColor);
       gEnter.append('rect').attr('class', 'nv-measure');
-      gEnter.append('path').attr('class', 'nv-markerTriangle');
+      gEnter.append('path').attr('class', 'nv-markerTriangle').style('fill', markerTriangleColor);
+
 
       wrap.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
